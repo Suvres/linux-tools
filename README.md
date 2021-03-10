@@ -17,6 +17,7 @@ $ g-screenshot-ocr <lang>
 ```
 
 If You want use other lang than `eng`, that You need to install `tesseract-ocr-<lang>` packages wher `<lang>` is language that You need;  
+  
 Example: 
 ```bash
 $ sudo apt install tesseract-ocr-pol
