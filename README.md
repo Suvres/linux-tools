@@ -3,7 +3,7 @@ Linux utility scripts
 
 
 ## Tools
-* [G Screenshot Ocr] g-screenshot-ocr
+* [g-screenshot-ocr](##g-screenshot-ocr)
 
 
 ## G Screnshot Ocr
