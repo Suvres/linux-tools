@@ -1,0 +1,39 @@
+#!/bin/bash 
+# Dependencies: tesseract-ocr xsel gnome-screenshot
+
+can_use=1
+lang="${1}"
+
+echo -e "g-screenshot-ocr\n"
+
+# default lang
+if [ -z ${1+x} ]; then
+    lang="eng"
+fi
+
+# check dependencies
+for i in tesseract xsel gnome-screenshot; do
+    if ! command -v ${i} ; then
+       can_use=0
+    fi
+
+done
+
+# write message
+if [ ${can_use} -eq 0 ]; then
+    echo -e "\n\n[\e[0;31m*\e[0m] Check dependencies: tesseract-ocr, xsel, gnome-screenshot"
+    exit
+fi
+
+# body of script
+SCR_IMG=`mktemp`
+trap "rm $SCR_IMG*" EXIT
+
+gnome-screenshot -af $SCR_IMG.png     
+
+mogrify -modulate 100,0 -resize 400% $SCR_IMG.png 
+
+tesseract $SCR_IMG.png $SCR_IMG -l ${lang} &> /dev/null
+cat $SCR_IMG.txt | xsel -bi
+
+exit
